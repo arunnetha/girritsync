@@ -8,18 +8,17 @@ RUN apt-get update -y && \
 	docker-php-ext-install mysqli && \
 	docker-php-ext-install gd && \
 	docker-php-ext-install mbstring && \
-	docker-php-ext-install fileinfo
-COPY ./mantisbt-2.22.1.tar | tar xvC /tmp && \
-RUN mv mantisbt-*/* /var/www/html && \
-        chown -R www-data:www-data /var/www/html && \
+	docker-php-ext-install fileinfo && \
+	curl -sSL https://downloads.sourceforge.net/project/mantisbt/mantis-stable/2.22.1/mantisbt-2.22.1.tar.gz | tar xzC /tmp && \
+	mv mantisbt-*/* /var/www/html && \
+	chown -R www-data:www-data /var/www/html && \
     rm -rf /*.zip /tmp/* /var/tmp/* /var/lib/apt/lists/* && \
 	mkdir /config && \
 	cp /var/www/html/config/* /config && \
 	rm -rf /var/www/html/config && \
 	ln -s /config /var/www/html	&& \
 	chown -R www-data:www-data /config
-	
-	
+
 COPY ./httpd.conf /etc/apache2/sites-available/000-default.conf
 
 COPY ./php.ini $PHP_INI_DIR/conf.d/
