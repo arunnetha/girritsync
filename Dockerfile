@@ -7,7 +7,7 @@ RUN apt-get install -y libpng-dev
 RUN cd /tmp
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install gd
-RUN docker-php-ext-install mbstring
+#RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install fileinfo
 RUN curl -sSL https://sourceforge.net/projects/mantisbt/files/mantis-stable/2.24.1/mantisbt-2.24.1.tar.gz | tar xzC /tmp
 RUN ls
